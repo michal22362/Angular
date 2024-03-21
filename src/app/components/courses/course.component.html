@@ -1,0 +1,12 @@
+
+<div *ngFor="let course of courses; let i=index" [ngStyle]="{ 'background-color': i % 2 === 0 ? 'lightgrey' : 'white'}">
+    <h2 style="color: rgb(165, 42, 79);">{{ course.name }}</h2>
+    <p [ngStyle]="{ 'color': course.hours < 30 ? 'green' : course.hours < 60 ? 'orange' : 'red'}">
+        Hours: {{ course.hours }}
+        <span *ngIf="course.type === 'frontal' || course.type === 'laboratory'"> - Lacturer: {{ course.lecturerName }}</span>
+    </p>
+
+    <p [ngStyle]="{ 'color': course.startDate > today && course.startDate < nextMonth ? 'rgb(165, 42, 79)' : 'lightgrey' }">Course ending soon!</p>
+    <p [ngStyle]="{ 'color': course.startDate > today && course.startDate <= nextMonth ? 'yellow' : 'lightgrey' , 'font-weight': 'bold'}">Course starting soon!</p>
+    <button *ngIf="course.startDate < today" (click)="registerCourse()">Register</button>
+</div>
